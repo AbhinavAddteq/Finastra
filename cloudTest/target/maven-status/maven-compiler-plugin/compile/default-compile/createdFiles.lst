@@ -1,0 +1,8 @@
+com\finastra\test\models\Assignee.class
+com\finastra\test\models\Status.class
+com\finastra\test\controllers\ViewFieldDialog.class
+com\finastra\test\models\Fields.class
+com\finastra\test\models\AvatarUrls.class
+com\finastra\test\Utilities.class
+com\finastra\test\AddonApplication.class
+com\finastra\test\models\Issue.class

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Field Values</title>
+    <script src="https://connect-cdn.atl-paas.net/all.js" data-options="sizeToParent:true" async></script>
+
+    <!-- External dependencies -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.js"></script>
+    <script src="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.js"></script>
+    <!-- / External dependencies -->
+
+    <script src="/js/viewFieldValue.js"></script>
+</head>
+
+<body>
+<div class="ac-content">
+    <div class="aui-message aui-message-info">
+        <p class="title"><strong>Issue Field Details Screen</strong></p>
+    </div>
+
+    <form id="viewFieldValueForm" class="aui top-label" method="post"
+          th:object="${issue}" action="#" th:action="@{/viewFieldValueDialog}">
+
+        <div id="issue-key">
+            <label for="issueKey">Issue Key
+                <span class="aui-icon icon-required">(required)</span></label>
+            <input class="text medium-field misc-height" type="text"
+                   id="issueKey" name="key" th:field="*{key}" required>
+        </div>
+
+        <div class="error" th:if="${error}">
+            <span th:text="${error}" />
+        </div>
+
+        <input type="hidden" name="jwt" th:value="${atlassianConnectToken}">
+    </form>
+
+    <div class="aui-page-panel">
+        <div class="aui-page-panel-inner">
+            <table th:if="${issue.fields ne null}" class="aui">
+                <thead>
+                    <tr>
+                        <th>Issue Key</th>
+                        <th>Summary</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                        <th>Assignee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${issue.key}"></td>
+                        <td th:text="${issue.fields.summary}"></td>
+                        <td th:if="${issue.fields.status ne null}" th:text="${issue.fields.status.name}"></td>
+                        <td th:text="${issue.fields.description}"></td>
+                        <td th:if="${issue.fields.assignee ne null}" th:text="${issue.fields.assignee.displayName}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
