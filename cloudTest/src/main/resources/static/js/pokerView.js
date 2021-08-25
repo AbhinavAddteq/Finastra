@@ -83,6 +83,13 @@ function triggerSelectedIssue(issueKey) {
 }
 //------------end of Trigger selected issue details-------------------------------------------
 
+// add participant snippet
+function addParticipant(projectId) {
+    var url = '/viewPoker/participant?projectId=' + projectId + '&jwt=' + document.querySelector('#atlassianJwt').value;
+    $('#projectParticipants').load(url);
+}
+//----------end of add participant snippet--------------------------------------------------------
+
 $(document).ready(function () {
 
     var JWT_TOKEN = document.querySelector('#atlassianJwt').value;
@@ -112,6 +119,7 @@ $(document).ready(function () {
         var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + JWT_TOKEN;
 
         $('#selectedIssue').empty();
+        issueDetailsClose();
         $('#boardIssues').load(url);
     };
 
@@ -131,6 +139,7 @@ $(document).ready(function () {
         var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + JWT_TOKEN;
 
         $('#selectedIssue').empty();
+        issueDetailsClose();
 
         $('#boardIssues').load(url);
     }
@@ -150,6 +159,7 @@ $(document).ready(function () {
         var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + JWT_TOKEN;
 
         $('#selectedIssue').empty();
+        issueDetailsClose();
 
         $('#boardIssues').load(url);
     });
@@ -170,6 +180,7 @@ $(document).ready(function () {
         var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + JWT_TOKEN;
 
         $('#selectedIssue').empty();
+        issueDetailsClose();
 
         $('#boardIssues').load(url);
     }
@@ -188,6 +199,7 @@ $(document).ready(function () {
         var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + JWT_TOKEN;
 
         $('#selectedIssue').empty();
+        issueDetailsClose();
 
         $('#boardIssues').load(url);
     }

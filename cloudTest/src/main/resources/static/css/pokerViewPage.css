@@ -74,3 +74,17 @@ div#boardIssues {
 #issueDetails {
   display: none;
 }
+
+.participantAvatar {
+  height: 32px;
+  width: 32px;
+}
+
+div#projectParticipants {
+    padding-top: 15px;
+}
+
+div.projectParticipants {
+    float: left;
+    padding-right: 15px;
+}

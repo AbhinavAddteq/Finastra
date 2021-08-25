@@ -3,7 +3,7 @@ spring.datasource.url: jdbc:hsqldb:file:addon-db # Use a file-based backing stor
 
 addon:
   key: cloudTest
-  base-url: https://a001-2402-e280-3e0b-45c-a499-bbaa-f351-121c.ngrok.io
+  base-url: https://7d46-2402-e280-3e0b-45c-9e0-4b96-7128-5d.ngrok.io
 
 spring:
   thymeleaf: # Thymeleaf

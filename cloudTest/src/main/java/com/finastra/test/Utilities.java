@@ -1,8 +1,7 @@
 package com.finastra.test;
 
 import com.atlassian.connect.spring.AtlassianHostRestClients;
-import com.finastra.test.models.Issue;
-import com.finastra.test.models.JiraServerInfo;
+import com.finastra.test.models.*;
 import com.finastra.test.models.board.BoardIssuesData;
 import org.springframework.web.client.RestClientException;
 
@@ -69,5 +68,63 @@ public class Utilities {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    public static ProjectParticipants getProjectParticipants(AtlassianHostRestClients atlassianHostRestClients, String projectId) {
+
+        try {
+            ProjectProperty projectProperty = atlassianHostRestClients.authenticatedAsAddon()
+                    .getForObject("/rest/api/2/project/"+ projectId + "/properties/projectParticipants",
+                            ProjectProperty.class);
+
+            return projectProperty != null ? projectProperty.getValue() : null;
+
+        } catch (RestClientException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ProjectParticipants setProjectParticipants(AtlassianHostRestClients atlassianHostRestClients, String projectId, ProjectParticipants projectParticipants) {
+        System.out.println(projectParticipants);
+
+        try {
+            atlassianHostRestClients.authenticatedAsAddon()
+                    .put("/rest/api/2/project/"+ projectId + "/properties/projectParticipants",
+                            projectParticipants);
+            return projectParticipants;
+
+        } catch (RestClientException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public static AppUser getAppUser(AtlassianHostRestClients atlassianHostRestClients, String accountId) {
+
+        try {
+            return atlassianHostRestClients.authenticatedAsAddon()
+                    .getForObject("/rest/api/2/user?accountId=" + accountId,
+                            AppUser.class);
+
+        } catch (RestClientException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<AppUser> getAppUsers(AtlassianHostRestClients atlassianHostRestClients, List<String> accountIds) {
+        List<AppUser> appUsers = new ArrayList<>();
+
+        if (accountIds != null) {
+            for (String accountId : accountIds) {
+                AppUser appUser = getAppUser(atlassianHostRestClients, accountId);
+                if (appUser != null) {
+                    appUsers.add(appUser);
+                }
+            }
+        }
+
+        return appUsers;
     }
 }

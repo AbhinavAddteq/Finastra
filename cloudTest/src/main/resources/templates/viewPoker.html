@@ -75,7 +75,21 @@
                         <div class="aui-page-panel-inner">
                             <section class="aui-page-panel-content">
                                 <strong>Participants</strong>
+                                <button class="aui-button"
+                                        th:data-project-id="|${projectId}|"
+                                        onclick="addParticipant(this.getAttribute('data-project-id'))">Click to be a participant</button>
                                 <!-- main area for content -->
+                                <div id="projectParticipants">
+                                    <div th:fragment="participantsFragment" class="participantsFragment">
+                                        <div class="projectParticipants"
+                                             th:if="${participants ne null}"
+                                             th:each="participant: ${participants}">
+                                            <img class="participantAvatar"
+                                                 th:if="${participant.avatarUrls ne null}"
+                                                 th:src="${participant.avatarUrls.the48X48}">
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </div>

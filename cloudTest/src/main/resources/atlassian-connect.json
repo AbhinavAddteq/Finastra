@@ -14,7 +14,7 @@
     "signed-install": true
   },
 
-  "scopes": ["READ", "ACT_AS_USER"],
+  "scopes": ["READ", "WRITE", "ACT_AS_USER"],
 
   "modules": {
     "dialogs": [
