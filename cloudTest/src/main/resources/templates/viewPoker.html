@@ -43,8 +43,8 @@
                                                              th:if="${selectedIssue.fields.issuetype ne null}"
                                                              th:src="${selectedIssue.fields.issuetype.iconUrl}">
 
-                                                        <p class="itSummary"
-                                                           th:text="${selectedIssue.fields.summary}"></p>
+                                                        <span class="itSummary"
+                                                           th:text="${selectedIssue.fields.summary}"></span>
                                                     </div>
                                                     <div class="aui-item gridWrapperRight">
                                                         <a class="itKey"
@@ -88,7 +88,7 @@
                                 <div class="aui-group aui-group-split">
                                     <div class="aui-item">
                                         <select name="estimates"
-                                                placeholder="Click to choose">
+                                                class="pokerDropdowns select">
                                             <option>10s</option>
                                             <option>1s</option>
                                         </select>
@@ -115,6 +115,7 @@
                                     <div class="aui-item">
                                         <div class="aui-buttons">
                                             <select
+                                                    class="pokerDropdowns select"
                                                     th:unless="${#lists.isEmpty(allBoardIssues)}"
                                                     id="singleIssue"
                                                     name="singleIssue"
@@ -159,8 +160,8 @@
                                                              th:if="${boardIssue.fields.issuetype ne null}"
                                                              th:src="${boardIssue.fields.issuetype.iconUrl}">
 
-                                                        <p class="itSummary"
-                                                           th:text="${boardIssue.fields.summary}"></p>
+                                                        <span class="itSummary"
+                                                           th:text="${boardIssue.fields.summary}"></span>
                                                     </div>
                                                     <div class="aui-item gridWrapperRight">
                                                         <a class="itKey"

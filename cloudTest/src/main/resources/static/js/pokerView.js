@@ -84,6 +84,7 @@ function triggerSelectedIssue(issueKey) {
 //------------end of Trigger selected issue details-------------------------------------------
 
 $(document).ready(function () {
+
     var JWT_TOKEN = document.querySelector('#atlassianJwt').value;
 
     // JQL Editor Snippet
@@ -94,7 +95,7 @@ $(document).ready(function () {
     jqlQueryInput.addEventListener("click", function() {
         var currentJQL = this.value ? this.value : 'assignee IN (currentUser()) || reporter = currentUser()';
         var options = {
-          descriptionText: 'Please note, only issues associated with the current board will be displayed.',
+          descriptionText: 'Please note, only issues associated with the current board will be displayed when you submit.',
           jql: currentJQL
         };
 

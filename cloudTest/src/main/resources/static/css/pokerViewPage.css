@@ -48,7 +48,7 @@ div#boardIssues {
 .itSummary {
   grid-column: 2;
   grid-row: 1;
-  width: 200px;
+  width: 300px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
