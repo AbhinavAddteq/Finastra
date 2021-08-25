@@ -85,6 +85,8 @@
                                              th:if="${participants ne null}"
                                              th:each="participant: ${participants}">
                                             <img class="participantAvatar"
+                                                 th:data-account-id="|${participant.accountId}|"
+                                                 onclick="loadParticipantIssues(this.getAttribute('data-account-id'))"
                                                  th:if="${participant.avatarUrls ne null}"
                                                  th:src="${participant.avatarUrls.the48X48}">
                                         </div>

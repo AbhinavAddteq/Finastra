@@ -90,6 +90,20 @@ function addParticipant(projectId) {
 }
 //----------end of add participant snippet--------------------------------------------------------
 
+// load participant issues
+function loadParticipantIssues(accountId) {
+    var participantIssuesJQL = 'assignee = ' + accountId;
+    var boardId = jqlQueryInput.getAttribute('data-board-id');
+    var jql = encodeURIComponent(participantIssuesJQL);
+    var url = '/viewPoker/jql?jql=' + jql + '&boardId=' + boardId + '&jwt=' + document.querySelector('#atlassianJwt').value;
+
+    $('#selectedIssue').empty();
+    issueDetailsClose();
+
+    $('#boardIssues').load(url);
+}
+//--------------------end of load participant issues----------------------------------------------
+
 $(document).ready(function () {
 
     var JWT_TOKEN = document.querySelector('#atlassianJwt').value;

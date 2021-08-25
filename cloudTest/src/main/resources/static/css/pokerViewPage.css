@@ -88,3 +88,7 @@ div.projectParticipants {
     float: left;
     padding-right: 15px;
 }
+
+div.projectParticipants:hover {
+    cursor: pointer
+}
