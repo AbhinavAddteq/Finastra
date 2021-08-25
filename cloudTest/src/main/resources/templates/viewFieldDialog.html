@@ -8,7 +8,6 @@
     <!-- External dependencies -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.js"></script>
     <script src="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.js"></script>
     <!-- / External dependencies -->
 
@@ -27,7 +26,7 @@
         <div id="issue-key">
             <label for="issueKey">Issue Key
                 <span class="aui-icon icon-required">(required)</span></label>
-            <input class="text medium-field misc-height" type="text"
+            <input class="text medium-field" type="text"
                    id="issueKey" name="key" th:field="*{key}" required>
         </div>
 

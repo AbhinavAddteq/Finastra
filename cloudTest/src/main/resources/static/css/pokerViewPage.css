@@ -1,0 +1,76 @@
+div#issueDetailsContent {
+    padding-top: 30px;
+}
+
+div.pokerPanels {
+    border-style: none;
+}
+
+aside#issueDetails {
+    width: 25%;
+}
+
+div.boardIssuesFragment {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
+
+div#boardIssues {
+    padding-top: 30px;
+}
+
+.card:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
+}
+
+.gridWrapperLeft {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.gridWrapperRight {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.itIcon {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.itSummary {
+  grid-column: 2;
+  grid-row: 1;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.itKey {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.itPriority {
+  height: 16px;
+  width: 16px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.itEstimate {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#issueDetails {
+  display: none;
+}

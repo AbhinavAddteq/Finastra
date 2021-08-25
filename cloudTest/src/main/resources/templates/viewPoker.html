@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poker</title>
+    <script src="https://connect-cdn.atl-paas.net/all.js" async></script>
+
+    <!-- External dependencies -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://unpkg.com/@atlassian/aui@9.1.2/dist/aui/aui-prototyping.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- / External dependencies -->
+
+    <link rel="stylesheet" type="text/css" href="/css/pokerViewPage.css">
+    <script src="/js/pokerView.js"></script>
+</head>
+<body>
+    <div class="ac-content">
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <section class="aui-page-panel-content">
+                    <h3>Submit your personal estimates</h3>
+
+                    <!-- Selected issue details -->
+                    <div class="aui-page-panel pokerPanels">
+                        <div class="aui-page-panel-inner">
+                            <section class="aui-page-panel-content">
+                                <div id="selectedIssue">
+                                    <div th:fragment="selectedIssueFragment" class="selectedIssueFragment">
+                                        <div class="card" th:if="${selectedIssue ne null}">
+                                            <div class="card-body" data-aui-trigger
+                                                 aria-controls="issueDetails">
+                                                <div th:if="${selectedIssue.fields ne null}"
+                                                     class="aui-group aui-group-split">
+
+                                                    <div class="aui-item gridWrapperLeft">
+                                                        <img class="itIcon"
+                                                             th:if="${selectedIssue.fields.issuetype ne null}"
+                                                             th:src="${selectedIssue.fields.issuetype.iconUrl}">
+
+                                                        <p class="itSummary"
+                                                           th:text="${selectedIssue.fields.summary}"></p>
+                                                    </div>
+                                                    <div class="aui-item gridWrapperRight">
+                                                        <a class="itKey"
+                                                           th:href="@{{bUrl}/browse/{key}(bUrl=${baseUrl}, key=${selectedIssue.key})}"
+                                                           th:text="${selectedIssue.key}"></a>
+
+                                                        <img class="itPriority"
+                                                             th:if="${selectedIssue.fields.priority ne null}"
+                                                             th:src="${selectedIssue.fields.priority.iconUrl}">
+
+                                                        <aui-badge class="aui-badge-primary itEstimate"
+                                                                   th:if="${selectedIssue.fields.timetracking ne null}"
+                                                                   th:text="${selectedIssue.fields.timetracking.originalEstimate}"></aui-badge>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Participants -->
+                    <div class="aui-page-panel pokerPanels">
+                        <div class="aui-page-panel-inner">
+                            <section class="aui-page-panel-content">
+                                <strong>Participants</strong>
+                                <!-- main area for content -->
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Your estimates -->
+                    <div class="aui-page-panel pokerPanels">
+                        <div class="aui-page-panel-inner">
+                            <section class="aui-page-panel-content">
+                                <strong>Your estimation for story point estimate</strong>
+                                <div class="aui-group aui-group-split">
+                                    <div class="aui-item">
+                                        <select name="estimates"
+                                                placeholder="Click to choose">
+                                            <option>10s</option>
+                                            <option>1s</option>
+                                        </select>
+                                    </div>
+                                    <div class="aui-item">
+                                        <div class="aui-buttons">
+                                            <button class="aui-button">10s</button>
+                                            <button class="aui-button">1s</button>
+                                            <button class="aui-button">Show Estimates</button>
+                                            <button class="aui-button" disabled>Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- main area for content -->
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Issue and filter details -->
+                    <div class="aui-page-panel pokerPanels">
+                        <div class="aui-page-panel-inner">
+                            <section class="aui-page-panel-content">
+                                <div class="aui-group aui-group-split">
+                                    <div class="aui-item">
+                                        <div class="aui-buttons">
+                                            <select
+                                                    th:unless="${#lists.isEmpty(allBoardIssues)}"
+                                                    id="singleIssue"
+                                                    name="singleIssue"
+                                                    style="margin-right: 20px"
+                                                    placeholder="Select an Issue">
+                                                <option th:each="allBoardIssue: ${allBoardIssues}"
+                                                            th:value="${allBoardIssue.id}"
+                                                            th:text="${allBoardIssue.key}"></option>
+                                            </select>
+
+                                            <input th:data-board-id="|${boardId}|"
+                                                   id="jqlQueryInput" class="text long-field"
+                                                   style="margin-right: 20px"
+                                                   type="text" value="assignee IN (currentUser()) || reporter = currentUser()">
+
+                                            <button id="unEstimatedButton"
+                                                    style="margin-right: 20px" class="aui-button">Unestimated</button>
+                                            <button id="recentlyUpdatedButton" class="aui-button">Recently Updated</button>
+                                        </div>
+                                    </div>
+                                    <div class="aui-item">
+                                        <div class="aui-buttons">
+                                            <button id="refreshButton" class="aui-button">Refresh</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="boardIssues">
+                                    <div th:fragment="boardIssuesFragment" class="boardIssuesFragment">
+                                        <div class="card" th:unless="${#lists.isEmpty(boardIssues)}"
+                                             th:each="boardIssue: ${boardIssues}">
+                                            <div class="card-body" data-aui-trigger
+                                                 aria-controls="issueDetails"
+                                                 th:data-issue-key="|${boardIssue.key}|"
+                                                 onclick="triggerSelectedIssue(this.getAttribute('data-issue-key'))">
+
+                                                <div th:if="${boardIssue.fields ne null}"
+                                                     class="aui-group aui-group-split">
+
+                                                    <div class="aui-item gridWrapperLeft">
+                                                        <img class="itIcon"
+                                                             th:if="${boardIssue.fields.issuetype ne null}"
+                                                             th:src="${boardIssue.fields.issuetype.iconUrl}">
+
+                                                        <p class="itSummary"
+                                                           th:text="${boardIssue.fields.summary}"></p>
+                                                    </div>
+                                                    <div class="aui-item gridWrapperRight">
+                                                        <a class="itKey"
+                                                           th:href="@{{bUrl}/browse/{key}(bUrl=${baseUrl}, key=${boardIssue.key})}"
+                                                           th:text="${boardIssue.key}"></a>
+
+                                                        <img class="itPriority"
+                                                             th:if="${boardIssue.fields.priority ne null}"
+                                                             th:src="${boardIssue.fields.priority.iconUrl}">
+
+                                                        <aui-badge class="aui-badge-primary itEstimate"
+                                                                   th:if="${boardIssue.fields.timetracking ne null}"
+                                                                   th:text="${boardIssue.fields.timetracking.originalEstimate}"></aui-badge>
+
+                                                        <button class="aui-button aui-button-subtle"
+                                                                th:data-issue-key="|${boardIssue.key}|"
+                                                                onclick="triggerDetails(this.getAttribute('data-issue-key'))">Details</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div th:if="${#lists.isEmpty(boardIssues)}"
+                                             class="aui-message aui-message-warning">
+                                            <p class="title"><strong>No Issues!</strong></p>
+                                            <p>No issues returned for the selected filter. Please try another filter.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Issue details side panel -->
+                <aside class="aui-page-panel-sidebar" id="issueDetails">
+                    <div class="aui-buttons">
+                        <button class="aui-button"
+                                onclick="issueDetailsClose()">Close</button>
+                    </div>
+
+                    <div id="issueDetailsContent"></div>
+                </aside>
+            </div>
+        </div>
+
+        <input type="hidden" id="atlassianJwt" name="jwt" th:value="${atlassianConnectToken}">
+    </div>
+</body>
+</html>

@@ -45,6 +45,18 @@
           }
         }
       }
+    ],
+
+    "jiraProjectPages": [
+      {
+        "key": "finastraPoker",
+        "name": {
+          "value": "Poker"
+        },
+        "url": "/viewPoker?boardId=${board.id}&projectId={project.id}&accountId={profileUser.accountId}",
+        "iconUrl": "/images/pokerIcon.png",
+        "weight": 1000
+      }
     ]
   }
 }
